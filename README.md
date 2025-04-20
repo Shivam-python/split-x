@@ -89,8 +89,9 @@ cd your-repo
 
 ---
 
-### 2. Set environment variables
+### 2. Set environment variables & logs folder
 
+- Create an empty direcoty called logs in root directory of django project (same level as file manage.py)
 - Create a `.env` file in the root directory.
 - copy values fromm .env.example to .env file.
 - Create gmail smtp credentials for sending email.
