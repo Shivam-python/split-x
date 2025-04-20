@@ -309,7 +309,45 @@
 					"response": []
 				},
 				{
-					"name": "Add Expense",
+					"name": "Add new Expense",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dinner@Kafkas\",\r\n    \"balance_amt\": \"1800\",\r\n    \"split_breakup\": [\r\n        {\r\n            \"split_value\": \"700\",\r\n            \"split_type\": \"Exact\",\r\n            \"expense_user\": \"3\",\r\n            \"status\": \"Pending\"\r\n        },\r\n        {\r\n            \"split_value\": \"1100\",\r\n            \"split_type\": \"Exact\",\r\n            \"expense_user\": \"1\",\r\n            \"status\": \"Paid\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/expense-app/expense/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"expense-app",
+								"expense",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Group Expense",
 					"request": {
 						"auth": {
 							"type": "bearer",
