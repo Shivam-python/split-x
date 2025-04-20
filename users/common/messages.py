@@ -1,0 +1,17 @@
+INVALID_USERNAME = "No username was specified!"
+FRIEND_REMOVED = "Friend removed successfully"
+FRIEND_ADDED_SUCCESSFULLY = "Friend added successfully"
+PROFILE_NOT_FOUNF = "Profile data not found"
+LOG_OUT_SUCCESS = "Log-out successful"
+LOGOUT_FAILED = "Log-out failed"
+FRIEND_LIST_FETCHED_SUCCESSFULLY = "Friends list fetched successfully"
+FRIEND_DETAILS_FETCHED_SUCCESSFULLY = "Friends details fetched successfully"
+FRIEND_NOT_FOUND = "Friend Details not found"
+LOGIN_SUCCESS = "Login Successful"
+LOGIN_FAILED = "Login attempt failed"
+INVITE_SUBJECT = 'Split-X Invitation!'
+INVITE_SENT = "Invite Sent Successfully"
+INVITE_FAILED = "Error sending invite"
+
+TOKEN_REFRESHED = "Token refreshed successfully"
+TOKEN_REFRESH_FAILED = "Token refresh failed with exception"

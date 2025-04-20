@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Failed</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fdecea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid #f5c6cb;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            max-width: 500px;
+        }
+        .card h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .card p {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>❌ Payment Failed</h1>
+        <p><strong>Payment ID:</strong> {{ payment_obj.payment_id }}</p>
+        {% if payment_obj.is_offline %}
+    <p><strong>Mode:</strong>Offline</p>
+    {% else %}
+    <p><strong>Mode:</strong>Online</p>
+    {% endif %}
+        <p>Oops! Something went wrong. Please try again or contact support.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Simulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .field {
+            margin-bottom: 1.5rem;
+        }
+        .label {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        .value {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #ccc;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        button {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .success { background-color: #4CAF50; color: white; }
+        .failure { background-color: #f44336; color: white; }
+        .offline-success { background-color: #2196F3; color: white; }
+        .offline-failure { background-color: #FF9800; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Simulate Payment</h2>
+
+        <div class="field">
+            <span class="label">Amount</span>
+            <div class="value">{{ payment_obj.amount }}</div>
+        </div>
+
+        <div class="field">
+            <span class="label">Payment ID</span>
+            <div class="value">{{ payment_obj.payment_id }}</div>
+        </div>
+
+        <div class="buttons">
+            <form method="post" action="/expense-app/payment/settle/">
+                <input type="hidden" name="payment_id" value="{{ payment_obj.payment_id }}">
+                <input type="hidden" name="user_id" value="{{ payment_obj.expense_split.expense_user.id }}">
+                <input type="hidden" name="status" value="Settled">
+                <input type="hidden" name="mode" value="online">
+                <button type="submit" class="success">Settle Success</button>
+            </form>
+
+            <form method="post" action="/expense-app/payment/settle/">
+                <input type="hidden" name="payment_id" value="{{ payment_obj.payment_id }}">
+                <input type="hidden" name="user_id" value="{{ payment_obj.expense_split.expense_user.id }}">
+                <input type="hidden" name="status" value="Failed">
+                <input type="hidden" name="mode" value="online">
+                <button type="submit" class="failure">Settle Failure</button>
+            </form>
+
+            <form method="post" action="/expense-app/payment/settle/">
+                <input type="hidden" name="payment_id" value="{{ payment_obj.payment_id }}">
+                <input type="hidden" name="user_id" value="{{ payment_obj.expense_split.expense_user.id }}">
+                <input type="hidden" name="status" value="Settled">
+                <input type="hidden" name="mode" value="Offline">
+                <button type="submit" class="offline-success">Offline Success</button>
+            </form>
+
+            <form method="post" action="/expense-app/payment/settle/">
+                <input type="hidden" name="payment_id" value="{{ payment_obj.payment_id }}">
+                <input type="hidden" name="user_id" value="{{ payment_obj.expense_split.expense_user.id }}">
+                <input type="hidden" name="status" value="Failed">
+                <input type="hidden" name="mode" value="Offline">
+                <button type="submit" class="offline-failure">Offline Failure</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

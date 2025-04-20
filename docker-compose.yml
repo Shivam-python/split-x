@@ -1,0 +1,78 @@
+version: '3'
+services:
+  splitwise_db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    volumes:
+      - ./data/mysql/db:/var/lib/mysql
+      - ./data/mysql/logs:/var/log
+      - ./data/mysql/data:/data
+      - ./data/mysql/mysqld:/var/run/mysqld
+    restart: always
+    ports:
+      - '3306:3306'
+    container_name: splitwise_db
+    environment:
+      MYSQL_DATABASE: 'splitwise'
+#      MYSQL_USER: 'root'
+#      MYSQL_PASSWORD: 'Pa55word!'
+      MYSQL_ROOT_PASSWORD: 'Pa55word!'
+    networks:
+      - splitwise
+
+  redis:
+    image: redis:latest
+    restart: always
+#    expose:
+#      - '6379'
+    ports:
+      - '6379:6379'
+    networks:
+      - splitwise
+
+  splitwise_web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - .:/splitwise
+    ports:
+      - "8000:8000"
+    container_name: splitwise_web
+    command: >
+      sh -c "
+      python3 manage.py migrate --noinput &&
+      python3 manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - splitwise_db
+    networks:
+      - splitwise
+
+  splitwise_celery:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: celery -A splitwise_app worker -l info -Q notification-queue -E
+    environment:
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+    volumes:
+      - .:/celery_data
+    depends_on:
+      - splitwise_web
+      - redis
+    links:
+      - redis:redis
+    container_name: splitwise_celery
+    networks:
+      - splitwise
+
+volumes:
+  shared-volume:
+
+networks:
+  splitwise:
+    driver: bridge
