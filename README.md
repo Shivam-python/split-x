@@ -1,12 +1,3 @@
----
-
-```markdown
-# 🐳 Django Project with Docker Compose
-
-This project runs a Django app using Docker and Docker Compose. It includes support for PostgreSQL (or any DB you're using), Celery, Redis, etc., if applicable.
-
----
-
 ## 🧾 Project Details
 
 This project is a **Splitwise clone** built using **Django REST Framework**. It replicates key functionalities of the
