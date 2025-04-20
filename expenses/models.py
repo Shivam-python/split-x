@@ -84,3 +84,6 @@ class Settlement(models.Model):
 
     def __str__(self):
         return f'Settlement of amount : {self.amount} for {self.expense_split.expense.name} : {self.status}'
+
+    def expense_name(self):
+        return self.expense_split.expense.name

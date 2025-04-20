@@ -50,7 +50,7 @@ class ExpenseAdmin(admin.ModelAdmin):
 
 @register(Settlement)
 class SettlementAdmin(admin.ModelAdmin):
-    list_display = ['payment_id','expense_split','amount','status','is_offline']
+    list_display = ['payment_id', 'expense_name', 'expense_split', 'amount', 'status', 'is_offline']
 
 
 @register(ExpenseSplit)
