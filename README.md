@@ -71,9 +71,9 @@ Make sure you have the following installed:
 - **Authentication**: JWT
 - **Containerization**: Docker + Docker Compose
 
-Reason for choosing the database & framework is skillset & familiarity with the frameworks & related configuration.
+Reason for choosing the database & framework is skillset & familiarity with the frameworks & related configuration. Also for database I wanted ACID compliance (transaction safety), strong data relationships and mature tooling & ORM Support which mysql served best.
 
-Same can be implemented with any other RDBMS database & FastAPI
+Same can be implemented with any other RDBMS database like postgres, mariadb & FastAPI
  
 ---
 ---
